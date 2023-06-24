@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.IO;
+using System.Windows;
 
 namespace DesktopContactsApp
 {
@@ -7,5 +9,9 @@ namespace DesktopContactsApp
     /// </summary>
     public partial class App : Application
     {
+        private static string databaseName = "Contacts.db";
+        private static string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        public static string databasePath = Path.Combine(folderPath, databaseName);
+
     }
 }

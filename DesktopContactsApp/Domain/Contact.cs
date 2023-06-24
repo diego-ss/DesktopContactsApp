@@ -5,7 +5,7 @@ namespace DesktopContactsApp.Domain
     public class Contact
     {
         [PrimaryKey, AutoIncrement]
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
         [MaxLength(50)]
         public string Name { get; set; }
