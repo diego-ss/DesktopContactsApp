@@ -1,5 +1,6 @@
 ﻿using DesktopContactsApp.Domain;
 using SQLite;
+using System.Collections.Generic;
 using System.Windows;
 
 namespace DesktopContactsApp
@@ -12,7 +13,7 @@ namespace DesktopContactsApp
         public MainWindow()
         {
             InitializeComponent();
-            ReadDatabase();
+            FillContactsList();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -20,15 +21,22 @@ namespace DesktopContactsApp
             var newContactWindow = new NewContactWindow();
             newContactWindow.ShowDialog();
 
-            ReadDatabase();
+            FillContactsList();
         }
 
-        private void ReadDatabase()
+        private void FillContactsList()
         {
+            List<Contact> contacts;
+
             using (SQLiteConnection connection = new SQLiteConnection(App.databasePath))
             {
                 connection.CreateTable<Contact>();
-                var contacts = connection.Table<Contact>().ToList();
+                contacts = connection.Table<Contact>().ToList();
+            }
+
+            if(contacts != null)
+            {
+                contactsListView.ItemsSource = contacts;
             }
         }
     }
