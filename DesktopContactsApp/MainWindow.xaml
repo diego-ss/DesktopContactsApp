@@ -13,6 +13,7 @@
                  TextChanged="FilterTextBox_TextChanged"/>
         <ListView x:Name="contactsListView"
                   Height="280"
+                  SelectionChanged="contactsListView_SelectionChanged"
                   Margin="0 5 0 0">
             <ListView.ItemTemplate>
                 <DataTemplate>

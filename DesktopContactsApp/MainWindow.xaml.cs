@@ -49,5 +49,18 @@ namespace DesktopContactsApp
             var filteredList = contacts.Where(c => c.Name.ToUpper().Contains(textBox.Text.ToUpper())).ToList();
             contactsListView.ItemsSource = filteredList;
         }
+
+        private void contactsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedContact = contactsListView.SelectedItem as Contact;
+
+            if (selectedContact != null)
+            {
+                ContactDetailsWindow contactDetailsWindow = new ContactDetailsWindow(selectedContact);
+                contactDetailsWindow.ShowDialog();
+
+                FillContactsList();
+            }
+        }
     }
 }
