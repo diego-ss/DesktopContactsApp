@@ -29,7 +29,7 @@ namespace DesktopContactsApp
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
-            var messageResult = MessageBox.Show("Are you sure to delete thiscontact? This operation can't be undone!",
+            var messageResult = MessageBox.Show("Are you sure to delete this contact? This operation can't be undone!",
                 "Delete contact", 
                 MessageBoxButton.YesNo, 
                 MessageBoxImage.Question);
@@ -48,14 +48,25 @@ namespace DesktopContactsApp
 
         private void updateButton_Click(object sender, RoutedEventArgs e)
         {
-            _contact.Name = nameTextBox.Text;
-            _contact.Email = emailTextBox.Text;
-            _contact.Phone = phoneTextBox.Text; 
+            var messageResult = MessageBox.Show("Are you sure to update this contact?",
+                "Update contact",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
 
-            using (SQLiteConnection connection = new SQLiteConnection(App.databasePath))
+            if (messageResult == MessageBoxResult.Yes)
             {
-                connection.CreateTable<Contact>();
-                connection.Update(_contact);
+                _contact.Name = nameTextBox.Text;
+                _contact.Email = emailTextBox.Text;
+                _contact.Phone = phoneTextBox.Text;
+
+                using (SQLiteConnection connection = new SQLiteConnection(App.databasePath))
+                {
+                    connection.CreateTable<Contact>();
+                    connection.Update(_contact);
+                }
+
+                MessageBox.Show("Contact updated successfully!");
+                this.Close();
             }
         }
     }
