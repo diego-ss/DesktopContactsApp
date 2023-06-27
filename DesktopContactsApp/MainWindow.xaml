@@ -16,6 +16,12 @@
                   Height="280"
                   SelectionChanged="contactsListView_SelectionChanged"
                   Margin="0 5 0 0">
+            <!--O listviewitem é um container do datetamplate. Então o estilo aqui está sendo aplicado ao content-->
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.ItemTemplate> 
                 <DataTemplate>
                     <uc:ContactControl Contact="{Binding}"/>
